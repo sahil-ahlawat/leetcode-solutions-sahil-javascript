@@ -1,0 +1,85 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    //s = "MCMXCIV";
+    //1994
+    let sum = 0;
+    let previous = "";
+    for(let i = 0; i<s.length; i++){
+        if(s[i+1]){
+            sum = sum + romantoval(s[i], previous, s[i+1]);
+        }
+        else{
+            sum = sum + romantoval(s[i], previous, ""); 
+        }
+         
+        previous = s[i];
+    }   
+    return sum;
+};
+function romantoval(s, previous, next){
+    if((s == "I") && (next == "V" || next == "X")){
+       return 0;
+       }
+    if((s == "X") && (next == "L" || next == "C")){
+       return 0;
+       }
+    if((s == "C") && (next == "D" || next == "M")){
+       return 0;
+       }
+    if((previous == "I") && (s == "V" || s == "X")){
+        switch(s){
+            case("V"):
+            return 4;
+            break;
+            case("X"):
+            return 9;
+            break;          
+                    }
+    }
+if((previous == "X") && (s == "L" || s == "C")){
+        switch(s){
+            case("L"):
+            return 40;
+            break;
+            case("C"):
+            return 90;
+            break;          
+                    }
+    }
+    if((previous == "C") && (s == "D" || s == "M")){
+        switch(s){
+            case("D"):
+            return 400;
+            break;
+            case("M"):
+            return 900;
+            break;          
+                    }
+    }
+    switch(s){
+            case("I"):
+            return 1;
+            break;
+            case("V"):
+            return 5;
+            break;
+            case("X"):
+            return 10;
+            break;
+            case("L"):
+            return 50;
+            break;
+            case("C"):
+            return 100;
+            break;
+            case("D"):
+            return 500;
+            break;
+            case("M"):
+            return 1000;
+            break;
+    }
+}
